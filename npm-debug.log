@@ -1,0 +1,99 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/Cellar/node/4.2.1/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@2.14.7
+3 info using node@v4.2.1
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/rberanek/src/new/WKWebView',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/rberanek/.npm/gina-plugin-wkwebview/0.6.5/package.tgz not in flight; packing
+9 verbose tar pack [ '/Users/rberanek/.npm/gina-plugin-wkwebview/0.6.5/package.tgz',
+9 verbose tar pack   '/Users/rberanek/src/new/WKWebView' ]
+10 verbose tarball /Users/rberanek/.npm/gina-plugin-wkwebview/0.6.5/package.tgz
+11 verbose folder /Users/rberanek/src/new/WKWebView
+12 info prepublish gina-plugin-wkwebview@0.6.5
+13 verbose addLocalTarball adding from inside cache /Users/rberanek/.npm/gina-plugin-wkwebview/0.6.5/package.tgz
+14 silly cache afterAdd gina-plugin-wkwebview@0.6.5
+15 verbose afterAdd /Users/rberanek/.npm/gina-plugin-wkwebview/0.6.5/package/package.json not in flight; writing
+16 verbose afterAdd /Users/rberanek/.npm/gina-plugin-wkwebview/0.6.5/package/package.json written
+17 silly publish { version: '0.6.5',
+17 silly publish   name: 'gina-plugin-wkwebview',
+17 silly publish   cordova_name: 'WKWebView Polyfill',
+17 silly publish   description: 'A drop-in replacement of UIWebView for boosted performance and enhanced HTML5 support',
+17 silly publish   license: 'MIT',
+17 silly publish   repo: 'https://github.com/curlydj/WKWebView.git',
+17 silly publish   issue: 'https://github.com/curlydj/WKWebView/issues',
+17 silly publish   keywords:
+17 silly publish    [ 'Webkit',
+17 silly publish      'Webkit webview',
+17 silly publish      'WKWebView Polyfill',
+17 silly publish      'WKWebView',
+17 silly publish      'WebView+',
+17 silly publish      'ecosystem:cordova' ],
+17 silly publish   platforms: [ 'ios' ],
+17 silly publish   engines: [ { name: 'cordova', version: '>=3.0.0' } ],
+17 silly publish   readme: '# Cordova WKWebView Polyfill Plugin\nby [Eddy Verbruggen](http://twitter.com/eddyverbruggen) / [Telerik](http://www.telerik.com)\n\n\n_iOS9 warning:_ please test your app on iOS 9 and move to the 0.6.0 release if things are broken!\n\n\n## 0. Index\n\n1. [Description](#1-description)\n2. [Screenshot](#2-screenshot)\n3. [Installation](#3-installation)\n4. [Changelog](#4-changelog)\n5. [Credits](#5-credits)\n6. [License](#6-license)\n\n## 1. Description\n\n_BETA_ - things may break, [please post your feedback :)](https://github.com/EddyVerbruggen/cordova-plugin-wkwebview/issues)\n\n* Allows you to use the new WKWebView on iOS 8 (the simulator is supported as well).\n* Falls back to UIWebView on iOS 7 and lower.\n* Will hopefully cease to exist soon (when Apple releases a fixed WKWebView so Cordova can use it without the hacks I needed to apply).\n* As a matter of fact, [Apache is working on a similar plugin (which you can\'t use at the moment of writing)](https://github.com/apache/cordova-plugins/tree/master/wkwebview-engine) which I came across after releasing version 0.1.1. It targets Cordova 3.7.0 and up whereas this plugin is supported on 3.0.0 an up. \n\n### Take note!\n\n* For a seamless upgrade to iOS9 this plugin wipes any existing `NSAppTransportSecurity` configuration you may have done (a new feature in iOS9) to allow communication with even HTTP (non-S) backends, like previous iOS versions did. You can and should configure access rules (`config.xml`) and use the whitelist plugin as before.\n* [Ionic](http://ionicframework.com/) tip: to prevent flashes of a black background, make sure you set `ion-nav-view`\'s `background-color` to `transparent`.\n* If you need the [device plugin](https://github.com/apache/cordova-plugin-device), use at least Cordova-iOS 3.6.3 (deviceready never fires with 3.5.0 due to a currently unknown reason).\n* When making AJAX requests to a remote server make sure it supports CORS. See the [Telerik Verified Marketplace documentation](http://plugins.telerik.com/plugin/wkwebview) for more details on this and other valuable pointers. As a last resort you can add [this CORS-Proxy](https://github.com/gr2m/CORS-Proxy) between your app and the server.\n* You can load files from the app\'s cache folders by using the entire path (/var/.../Library/...) or simply \'/Library/..\' (or \'/Documents/..\').\n* This plugin features crash recovery: if the WKWebView crashes, it will auto-restart (otherwise you\'d have an app with a blank page as it doesn\'t crash the app itself). Crash recovery requires a filled `<title>anything</title>` tag in your html files. If you want to disable this feature, set the `config.xml` property `DisableCrashRecovery` to `true`.\n* In order to open links like `tel:` and `mailto:` you need to add `target="_blank"`: `<a href="tel:+31611223344" target="_blank">call!</a>`\n\n## 2. Screenshot\nThis image shows the [SocialSharing plugin](https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin) in action while running [a performance test](https://www.scirra.com/demos/c2/particles/) in an iframe on my iPhone 6 (older devices show an even larger difference).\nIt\'s a screenshot of the [demo app](demo/index.html).\n\n<img src="https://raw.githubusercontent.com/Telerik-Verified-Plugins/WKWebView/master/screenshots/UIWebView-vs-WKWebView.png" width="700"/>\n\n## 3. Installation\n\nFrom npm\n```\n$ cordova plugin add cordova-plugin-wkwebview\n```\n\nSpecify a custom port (default 12344), you can omit this if you want to use the default in case you use a recent Cordova CLI version\n```\n$ cordova plugin add cordova-plugin-wkwebview --variable WKWEBVIEW_SERVER_PORT=12344\n```\n\nNo need for anything else - you can now open the project in XCode 6 if you like.\n\n## 4. Changelog\n* __0.6.5__  `KeyboardDisplayRequiresUserAction` works! So set to `false` if you want the keyboard to pop up when programmatically focussing an input field.\n* __0.6.4__  On top of the port preference introduced in 0.6.3 you can now override the default variable when installing this plugin (see \'Installation\').\n* __0.6.3__  By default the embedded webserver uses port `12344`, but if you want to you can now override that port by setting f.i. `<preference name="WKWebViewPluginEmbeddedServerPort" value="20000" />` in `config.xml`.\n* __0.6.2__  LocalStorage is copied from UIWebView to WKWebView again (iOS location was recently changed as it appears).\n* __0.6.1__  Allow reading files from /tmp, so the camera plugin file URI\'s work. Thx #155.\n* __0.6.0__  iOS9 (GM) compatibility. Also, compatibility with iOS8 devices when building with XCode 7 (iOS9 SDK). Dialogs (alert, prompt, confirm) were broken.\n* __0.5.1__  Added support for `config.xml` property `DisableLocalStorageSyncWithUIWebView` (default `false`). Set it to `true` if you want to switch back to UIWebView and retain LS changes made while running WKWebView.\n* __0.5.0__  iOS9 (beta) compatibility, keyboard scroll fix, white keyboard background if no specific color is specified (was black).\n* __0.4.0__  Compatibility with Telerik LiveSync and LivePatch. Disabled the horizontal and vertical scrollbars. Added support for `config.xml` property `DisableCrashRecovery` (default `false`).\n* __0.3.8__  Adding a way to access files in \'/Library/\' and \'/Documents/\' (simply use those prefixes), thanks #88!\n* __0.3.7__  Custom URL Schemes did not work, see #98, also this version includes crash recovery, thanks #62!\n* __0.3.6__  Bind embedded webserver to localhost so it can\'t be reached from the outside, thanks #64!\n* __0.3.5__  Compatibility with the statusbar plugin: allow the statusbar to not overlay the webview, thanks #6 and #20!\n* __0.3.4__  The GCDWebServer is now compatible with all iOS architectures, thanks #47 and #48!\n* __0.3.2__  Switched embedded HTTP server from CocoaHTTP server to GCDWebServer, thanks #43!\n* __0.3.1__  Compatibility with the SplashScreen plugin\n* __0.3.0__  Enhanced loading files with the embedded HTTP server, thanks #36!\n* __0.2.7__  Cut app startup time in half - not noticable unless you have a lot of files in your app, see #32\n* __0.2.6__  `Config.xml` settings like `MediaPlaybackRequiresUserAction` (autoplay HTML 5 video) are now supported, see #25.\n* __0.2.5__  Fixed a script error for Cordova 3.5.0 and lower, see #17.\n* __0.2.4__  Compatibility with the `device` plugin on Cordova 3.5.0 and lower, see #17.\n* __0.2.3__  Compatibility with the `close` function of the [Ionic Keyboard Plugin](https://github.com/driftyco/ionic-plugins-keyboard).\n* __0.2.2__  Compatibility with plugins which use the superview of the \'classic\' webview, like [ActivityIndicator](https://github.com/Initsogar/cordova-activityindicator)\n* __0.2.1__  LocalStorage sync between UIWebView and WKWebView - on a real device as well\n* __0.2.0__  LocalStorage sync between UIWebView and WKWebView - on a simulator only\n* __0.1.3__  Compatibility with [InAppBrowser](https://github.com/apache/cordova-plugin-inappbrowser)\n* __0.1.2__  Compatibility with plugins like [Toast](https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin) which add a subview to the webview (they didn\'t show)\n* __0.1.1__  Cleanup to get rid of a few (deprecation) warnings - lots left (on purpose) because they\'re thrown by a 3rd party framework and can be safely ignored\n* __0.1.0__  Added support for loading local files via XHR. This should now transparently work for $.ajax, AngularJS templateUrl\'s, etc. To this end the plugin adds an embedded HTTP server on port 12344 which is stopped when the app is put to sleep or exits.\n* __0.0.1__  Initial version\n\n## 5. Credits\nThis plugin was inspired by the hard work of the Apache Cordova team [(and most notably Shazron)](https://github.com/shazron/WKWebViewFIleUrlTest).\n\n## 6. License\n\n[The MIT License (MIT)](http://www.opensource.org/licenses/mit-license.html)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the "Software"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n',
+17 silly publish   readmeFilename: 'README.md',
+17 silly publish   gitHead: 'ac3bfe9bbc62f57fad7400adf3b9c0541edb4d68',
+17 silly publish   _id: 'gina-plugin-wkwebview@0.6.5',
+17 silly publish   scripts: {},
+17 silly publish   _shasum: 'e910a23dfc92af9e587ac0ee4d909a56ada1b283',
+17 silly publish   _from: '.' }
+18 verbose getPublishConfig undefined
+19 silly mapToRegistry name gina-plugin-wkwebview
+20 silly mapToRegistry using default registry
+21 silly mapToRegistry registry https://registry.npmjs.org/
+22 silly mapToRegistry uri https://registry.npmjs.org/gina-plugin-wkwebview
+23 verbose publish registryBase https://registry.npmjs.org/
+24 silly publish uploading /Users/rberanek/.npm/gina-plugin-wkwebview/0.6.5/package.tgz
+25 verbose request uri https://registry.npmjs.org/gina-plugin-wkwebview
+26 verbose request sending authorization for write operation
+27 info attempt registry request try #1 at 3:34:36 AM
+28 verbose request using bearer token for auth
+29 verbose request id 60ce01694b1f060f
+30 http request PUT https://registry.npmjs.org/gina-plugin-wkwebview
+31 http 403 https://registry.npmjs.org/gina-plugin-wkwebview
+32 verbose headers { 'content-type': 'application/json',
+32 verbose headers   'cache-control': 'max-age=60',
+32 verbose headers   'content-length': '95',
+32 verbose headers   'accept-ranges': 'bytes',
+32 verbose headers   date: 'Mon, 02 Nov 2015 02:35:04 GMT',
+32 verbose headers   via: '1.1 varnish',
+32 verbose headers   connection: 'keep-alive',
+32 verbose headers   'x-served-by': 'cache-fra1242-FRA',
+32 verbose headers   'x-cache': 'MISS',
+32 verbose headers   'x-cache-hits': '0',
+32 verbose headers   'x-timer': 'S1446431679.908090,VS0,VE24211' }
+33 verbose request invalidating /Users/rberanek/.npm/registry.npmjs.org/gina-plugin-wkwebview on PUT
+34 error publish Failed PUT 403
+35 verbose stack Error: "You cannot publish over the previously published version 0.6.5." : gina-plugin-wkwebview
+35 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+35 verbose stack     at CachingRegistryClient.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+35 verbose stack     at Request._callback (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+35 verbose stack     at Request.self.callback (/usr/local/lib/node_modules/npm/node_modules/request/request.js:198:22)
+35 verbose stack     at emitTwo (events.js:87:13)
+35 verbose stack     at Request.emit (events.js:172:7)
+35 verbose stack     at Request.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1063:14)
+35 verbose stack     at emitOne (events.js:82:20)
+35 verbose stack     at Request.emit (events.js:169:7)
+35 verbose stack     at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/request/request.js:1009:12)
+36 verbose statusCode 403
+37 verbose pkgid gina-plugin-wkwebview
+38 verbose cwd /Users/rberanek/src/new/WKWebView
+39 error Darwin 15.0.0
+40 error argv "/usr/local/Cellar/node/4.2.1/bin/node" "/usr/local/bin/npm" "publish"
+41 error node v4.2.1
+42 error npm  v2.14.7
+43 error code E403
+44 error "You cannot publish over the previously published version 0.6.5." : gina-plugin-wkwebview
+45 error If you need help, you may report this error at:
+45 error     <https://github.com/npm/npm/issues>
+46 verbose exit [ 1, true ]

@@ -15,9 +15,9 @@
 
   <keywords>Webkit, Webkit webview, WKWebView Polyfill, WKWebView, WebView+</keywords>
 
-  <repo>https://github.com/Telerik-Verified-Plugins/WKWebView.git</repo>
+  <repo>https://github.com/curlydj/WKWebView.git</repo>
 
-  <issue>https://github.com/Telerik-Verified-Plugins/WKWebView/issues</issue>
+  <issue>https://github.com/curlydj/WKWebView/issues</issue>
 
   <preference name="WKWEBVIEW_SERVER_PORT" default="12344" />
 
@@ -72,7 +72,7 @@
     <header-file src="src/ios/CDVWebViewUIDelegate.h"/>
     <source-file src="src/ios/CDVWebViewUIDelegate.m"/>
     
-    <dependency id="cordova-plugin-webserver" />
+    <dependency id="gina-plugin-webserver" />
 
   </platform>
 
